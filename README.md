@@ -1,0 +1,1 @@
+这是一个基础node项目，用于我学习使用node.js，不关注前端。分别使用nodejs原生学习，express重构学习以及Koa2重构学习node相关基础知识。具体文字版本笔记记录在了Notion笔记中：https://almond-seat-6d1.notion.site/Node-js-15067d76bdf34c9ab3bcfef0bb3d76e6
