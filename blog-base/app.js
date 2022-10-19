@@ -44,19 +44,25 @@ const serverHandle = (req, res) => {
     // 处理post data
     getPostData(req).then(postData => {
         req.body = postData;
+
         // 处理blog路由
-        const blogData = handleBlogRouter(req, res);
-        if (blogData) {
-            res.end(
-                JSON.stringify(blogData)
-            )
+        const blogResult = handleBlogRouter(req, res);
+        if (blogResult) {
+            blogResult.then(data => {
+                res.end(
+                    JSON.stringify(data)
+                )
+            })
             return;
         }
-        const userData = handleUserRouter(req, res)
-        if (userData) {
-            res.end(
-                JSON.stringify(userData)
-            )
+
+        const userResult = handleUserRouter(req, res)
+        if (userResult) {
+            userResult.then(data => {
+                res.end(
+                    JSON.stringify(data)
+                )
+            })
             return;
         }
         // 未命中路由返回404

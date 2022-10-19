@@ -1,1 +1,28 @@
 const env = process.env.NODE_ENV;
+
+let MYAQL_CONFIG;
+
+if (env === 'dev') {
+    MYAQL_CONFIG = {
+        host: '127.0.0.1',
+        user: 'root',
+        password: 'youareAstranger!0621',
+        port: '3306',
+        database: 'myblog'
+    }
+}
+
+// 这里是因为我并没有线上服务器，所以production下也使用了线下环境，只是配置问题，不用在意
+if (env === 'production') {
+    MYAQL_CONFIG = {
+        host: '127.0.0.1',
+        user: 'root',
+        password: '这里使用自己的root密码',
+        port: '3306',
+        database: 'myblog'
+    }
+}
+
+module.exports = {
+    MYAQL_CONFIG,
+}

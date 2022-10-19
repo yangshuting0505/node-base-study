@@ -10,42 +10,56 @@ const handleBlogRouter = (req, res) => {
         const author = req.query.author || '';
         const keyword = req.query.keyword || '';
 
-        const listData = getList(author, keyword);
-        return new SuccessModel(listData);
+        const result = getList(author, keyword);
+        return result.then(listData => {
+            return new SuccessModel(listData);
+        })
     }
 
     // 一篇博客内容
     if (method === 'GET' && req.path === '/api/blog/detail') {
-        const data = getDetail(id);
-        return new SuccessModel(data);
+        const result = getDetail(id);
+        return result.then(data => {
+            return new SuccessModel(data);
+        })
     }
 
     // 新增一篇博客
     if (method === 'POST' && req.path === '/api/blog/new') {
-        const data = newBlog(req.body)
-        return new SuccessModel(data);
+        // 登录还没写，author先用个假数据
+        req.body.author = 'shuting';
+        const result = newBlog(req.body);
+        return result.then(data => {
+            return new SuccessModel(data);
+        })
     }
 
     // 更新博客
     if (method === 'POST' && req.path === '/api/blog/update') {
-        const data = updateBlog(id, req.body);
-        if (data) {
-            return new SuccessModel();
-        }
-        else {
-            return new ErrorModel('更新博客失败');
-        }
+        const result = updateBlog(id, req.body);
+        return result.then(data => {
+            if (data) {
+                return new SuccessModel();
+            }
+            else {
+                return new ErrorModel('更新博客失败');
+            }
+        })
     }
 
     // 删除博客
     if (method === 'POST' && req.path === '/api/blog/del') {
-        const data = delBlog(id);
-        if (data) {
-            return new SuccessModel();
-        }
-        else {
-            return new ErrorModel('删除博客失败');
-        }
+        // 登录还没写，author先用个假数据
+        const author = 'shuting';
+        const result = delBlog(id, author);
+        return result.then(data => {
+            if (data) {
+                return new SuccessModel();
+            }
+            else {
+                return new ErrorModel('删除博客失败');
+            }
+        })
     }
 }
 
