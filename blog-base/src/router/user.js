@@ -10,6 +10,11 @@ const handleUserRouter = (req, res) => {
         const result = loginCheck(username, password);
         return result.then(data => {
             if (data.username) {
+                // 设置 session
+                req.session.username = data.username
+                req.session.realname = data.realname
+                // 同步到 redis
+                set(req.sessionId, req.session)
                 return new SuccessModel();
             }
             else {

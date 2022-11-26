@@ -1,6 +1,7 @@
 const env = process.env.NODE_ENV;
 
 let MYAQL_CONFIG;
+let REDIS_CONFIG;
 
 if (env === 'dev') {
     MYAQL_CONFIG = {
@@ -9,6 +10,10 @@ if (env === 'dev') {
         password: '这里使用自己的root密码',
         port: '3306',
         database: 'myblog'
+    }
+    REDIS_CONFIG = {
+        port: 6379,
+        host: '127.0.0.1',
     }
 }
 
@@ -21,8 +26,13 @@ if (env === 'production') {
         port: '3306',
         database: 'myblog'
     }
+    REDIS_CONFIG = {
+        port: 6379,
+        host: '127.0.0.1',
+    }
 }
 
 module.exports = {
     MYAQL_CONFIG,
+    REDIS_CONFIG
 }
