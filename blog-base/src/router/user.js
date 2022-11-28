@@ -1,4 +1,5 @@
-const {loginCheck} = require('../controller/user');
+const {login} = require('../controller/user');
+const { set } = require('../db/redis')
 const {SuccessModel, ErrorModel} = require('../model/resModel')
 
 const handleUserRouter = (req, res) => {
@@ -7,7 +8,7 @@ const handleUserRouter = (req, res) => {
     // 登录
     if (method === 'POST' && req.path === '/api/user/login') {
         const {username, password} = req.body;
-        const result = loginCheck(username, password);
+        const result = login(username, password);
         return result.then(data => {
             if (data.username) {
                 // 设置 session

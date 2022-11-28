@@ -7,7 +7,7 @@ if (env === 'dev') {
     MYAQL_CONFIG = {
         host: '127.0.0.1',
         user: 'root',
-        password: '这里使用自己的root密码',
+        password: 'youareAstranger!0621',
         port: '3306',
         database: 'myblog'
     }

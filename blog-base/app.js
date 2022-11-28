@@ -64,11 +64,11 @@ const serverHandle = (req, res) => {
     })
 
     // 解析 session （使用 redis）
-    let neetSetCookie = false;
-    let userId = req.cookie.userId;
+    let needSetCookie = false
+    let userId = req.cookie.userid
     if (!userId) {
-        neetSetCookie = true;
-        userId = `${Date.now()}_${Math.random()}`;
+        needSetCookie = true
+        userId = `${Date.now()}_${Math.random()}`
         // 初始化 redis 中的 session 值
         set(userId, {})
     }
